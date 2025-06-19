@@ -12,7 +12,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Getter
     private String email;
 
+    @Getter
     private String password;
 }
