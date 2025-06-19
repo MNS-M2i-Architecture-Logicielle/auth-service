@@ -3,6 +3,7 @@ package org.example.authservice.services;
 import org.example.authservice.dtos.LoginRequest;
 import org.example.authservice.dtos.RegisterRequest;
 import org.example.authservice.entities.User;
+import org.example.authservice.exceptions.BadCredentialsException;
 import org.example.authservice.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,8 @@ public class UserService {
         Optional<User> user = userRepository.findByEmail(request.getEmail());
 
         if (user.isEmpty() || !user.get().getPassword().equals(request.getPassword()))
-            return "Invalid email or password";
+             throw new BadCredentialsException("Invalid username or password");
 
-        return "Authentification réussi";
-    }
+        return user.get().getEmail().hashCode() + ":" + user.get().getPassword().hashCode();
+   }
 }
