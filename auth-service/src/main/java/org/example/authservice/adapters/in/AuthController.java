@@ -43,29 +43,25 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@RequestBody SignupRequest request) {
-        signupUseCase.register(request.getName(), request.getEmail(), request.getPassword());
+        signupUseCase.register(request.getEmail(), request.getPassword());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Data
     public static class SignupRequest {
-        private String name;
         private String email;
         private String password;
     }
 
-    @GetMapping("/validate")
-    public ResponseEntity<Map<String, Object>> validate(@RequestParam("token") String token) {
+    @PostMapping("/validate")
+    public ResponseEntity<Void> validate(@RequestBody Map<String, String> request) {
+        String token = request.get("token");
+
         if (!jwtProvider.validateToken(token)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        Claims claims = jwtProvider.getClaims(token);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("sub", claims.getSubject());
-        response.put("email", claims.get("email"));
-        response.put("exp", claims.getExpiration().getTime());
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
+
 }

@@ -31,7 +31,7 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setSubject(String.valueOf(client.getId()))
-                .claim("email", client.getMail())
+                .claim("email", client.getEmail())
                 .setIssuedAt(now)
                 .setExpiration(expiry)
                 .signWith(key, SignatureAlgorithm.HS256)

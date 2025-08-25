@@ -45,12 +45,14 @@ public class AuthService implements AuthUseCase, SignupUseCase {
     }
 
     @Override
-    public void register(String name, String email, String password) {
-        ClientCreationRequest request = new ClientCreationRequest();
-        request.setName(name);
-        request.setMail(email);
+    public void register(String email, String password) {
+        if (clientRepository.findByEmail(email).isPresent())
+            throw new IllegalStateException("Client with this email already exists");
+
+        Client request = new Client();
+        request.setEmail(email);
         request.setPassword(passwordEncoder.encode(password));
 
-        clientRepository.createClient(request);
+        clientRepository.save(request);
     }
 }
