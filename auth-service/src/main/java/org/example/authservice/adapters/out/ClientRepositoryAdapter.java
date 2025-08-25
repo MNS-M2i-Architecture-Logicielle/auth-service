@@ -18,18 +18,14 @@ public class ClientRepositoryAdapter implements ClientRepository {
 
     @Override
     public Optional<Client> findByEmail(String email) {
-        try {
-            Client client = clientPersistenceClient.getClientByEmail(email);
-            return Optional.ofNullable(client);
-        } catch (feign.FeignException.NotFound nf) {
-            return Optional.empty();
-        } catch (feign.FeignException fe) {
-            throw fe;
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email must not be null or empty");
         }
+        return clientPersistenceClient.getClientByMail(email);
     }
 
     @Override
-    public Client createClient(ClientCreationRequest request) {
+    public Client createClient(Client request) {
         return clientPersistenceClient.createClient(request);
     }
 }

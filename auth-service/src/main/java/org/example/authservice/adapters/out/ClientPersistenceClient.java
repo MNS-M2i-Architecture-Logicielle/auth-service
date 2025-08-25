@@ -5,18 +5,17 @@ import lombok.Setter;
 import org.example.authservice.adapters.in.dto.ClientCreationRequest;
 import org.example.authservice.domain.Client;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "client-persistence-service", url = "http://localhost:8082")
+import java.util.Optional;
+
+@FeignClient(name = "client-persistence-service", url = "http://localhost:8090/api/persistence")
 public interface ClientPersistenceClient {
 
-    @GetMapping("/api/clients/email/{email}")
-    Client getClientByEmail(@PathVariable("email") String email);
+    @GetMapping("/clients/mail/{mail}")
+    Optional<Client> getClientByMail(@PathVariable("mail") String mail);
 
-    @PostMapping("/api/clients")
-    Client createClient(@RequestBody ClientCreationRequest client);
+    @PostMapping("/clients")
+    Client createClient(@RequestBody Client client);
 }
 

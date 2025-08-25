@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ClientRepository {
     Optional<Client> findByEmail(String email);
-    Client createClient(ClientCreationRequest request);
+    Client createClient(Client request);
 }
