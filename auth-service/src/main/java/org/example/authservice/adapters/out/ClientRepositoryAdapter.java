@@ -1,6 +1,5 @@
 package org.example.authservice.adapters.out;
 
-import org.example.authservice.adapters.in.dto.ClientCreationRequest;
 import org.example.authservice.application.port.out.ClientRepository;
 import org.example.authservice.domain.Client;
 import org.springframework.stereotype.Component;

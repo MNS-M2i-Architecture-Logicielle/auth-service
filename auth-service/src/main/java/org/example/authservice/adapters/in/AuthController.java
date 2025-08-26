@@ -1,6 +1,8 @@
 package org.example.authservice.adapters.in;
 
 import lombok.Data;
+import org.example.authservice.adapters.in.dto.request.LoginRequest;
+import org.example.authservice.adapters.in.dto.request.SignupRequest;
 import org.example.authservice.application.port.in.AuthUseCase;
 import org.example.authservice.application.port.in.SignupUseCase;
 import org.example.authservice.application.port.in.dto.AuthResponse;
@@ -33,23 +35,10 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    @Data
-    public static class LoginRequest {
-        private String mail;
-        private String password;
-    }
-
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@RequestBody SignupRequest request) {
         signupUseCase.register(request.getName(), request.getMail(), request.getPassword());
         return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @Data
-    public static class SignupRequest {
-        private String name;
-        private String mail;
-        private String password;
     }
 
     @PostMapping("/validate")

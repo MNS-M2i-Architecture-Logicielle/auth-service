@@ -1,4 +1,4 @@
-package org.example.authservice.adapters.in.dto;
+package org.example.authservice.adapters.in.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,5 @@
 package org.example.authservice.application.service;
 
-import org.example.authservice.adapters.in.dto.ClientCreationRequest;
 import org.example.authservice.application.port.in.AuthUseCase;
 import org.example.authservice.application.port.in.SignupUseCase;
 import org.example.authservice.application.port.in.dto.AuthResponse;

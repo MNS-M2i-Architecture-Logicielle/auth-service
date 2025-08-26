@@ -1,8 +1,5 @@
 package org.example.authservice.adapters.out;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.example.authservice.adapters.in.dto.ClientCreationRequest;
 import org.example.authservice.domain.Client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
