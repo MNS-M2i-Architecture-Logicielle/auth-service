@@ -1,0 +1,11 @@
+package org.example.authservice.application.port.out;
+
+
+import org.example.authservice.domain.Client;
+
+import java.util.Optional;
+
+public interface ClientRepository {
+    Optional<Client> findByEmail(String email);
+    Client createClient(Client request);
+}
